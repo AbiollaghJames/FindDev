@@ -1,0 +1,4 @@
+Install express - Done
+Install dependencies (mongoose, nodemon, ejs, mongoDB) - Done
+Required directories (controllers, middlewares, views, routes) - Done
+create express server and database connection - Done

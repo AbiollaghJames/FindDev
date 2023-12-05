@@ -1,7 +1,13 @@
 // Main file
 const express = require('express');
 const mongoose = require('mongoose');
+const ejs = require('ejs');
 const app = express();
+
+// register view engine
+app.set('view engine', 'ejs');
+
+// db configs
 const port = 3000;
 const urlDB = "mongodb+srv://finddevgroup:VsGIjoSF5lNGEQL5@finddev.skpihhy.mongodb.net/developersDB?retryWrites=true&w=majority"
 
@@ -14,17 +20,20 @@ mongoose.connect(urlDB)
     console.log(err);
 });
 
+// Middleware & static files
+app.use(express.static('public'));
+
 // routes
 app.get('/', (req, res) => {
-    res.status(200).send('Thank you for your request, here is my response.');
+    res.render('home', {title: 'home'});
 });
 
 app.get('/about', (req, res) => {
-    res.status(200).send('Thank you for requesting about page, here is my response.');
+    res.render('about', {title: 'about'});
 });
 
-app.get('/contact', (req, res) => {
-    res.status(200).send('Thank you for requesting contact page, here is my response.');
+app.get('/document', (req, res) => {
+    res.render('document', {title: 'document'});
 });
 // lister
 
@@ -35,19 +44,3 @@ app.listen(port, (err) => {
     console.log("Server running");
 });
 
-
-
-
-
-
-
-
-
-
-// imports
-
-// Middlewares
-
-// Database connection
-
-// Routes
