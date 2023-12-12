@@ -1,46 +1,59 @@
-// Main file
-const express = require('express');
-const mongoose = require('mongoose');
-const ejs = require('ejs');
+const express = require("express");
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+const ejs = require("ejs");
+require("dotenv").config();
+
 const app = express();
 
-// register view engine
-app.set('view engine', 'ejs');
+app.set("view engine", "ejs");
+app.use(express.static("views"));
+app.use(bodyParser.json());
 
-// db configs
-const port = 3000;
-const urlDB = "mongodb+srv://finddevgroup:VsGIjoSF5lNGEQL5@finddev.skpihhy.mongodb.net/developersDB?retryWrites=true&w=majority"
+const port = process.env.PORT || 3000;
+const host = process.env.HOST || "127.0.0.1";
 
-// connect to database
-mongoose.connect(urlDB)
-.then(() => {
-    console.log("Database connected");
-})
-.catch((err) => {
-    console.log(err);
-});
+// mongooseDB Connection
+mongoose.connect(process.env.DB_CONNECTION)
+    .then(() => {
+        console.log("DB Connection established!");
+    })
+    .catch((err) => {
+        console.log(`Error connecting to DB ${err}`);
+    });
 
-// Middleware & static files
-app.use(express.static('public'));
+// //Sample Database for testing
+// const dev = {
+//     "name": "Abiolla",
+//     "email": "abiojame@protonmail.com",
+//     "location": "Nairobi, Kenya",
+//     "tech_stack": ['NodeJS', 'Flask', 'MongoDB', 'MySQL'],
+//     "social_media": {
+//         github: "link here",
+//         linkedin: "link here",
+//         twitter: "link here",
+//     },
+//     "projects": {
+//         title: "FindDev",
+//         description: "API that connects Devs",
+//         url: "link here",
+//     },
+// }
 
-// routes
-app.get('/', (req, res) => {
-    res.render('home', {title: 'home'});
-});
+// // routes
+// app.get('/', (req, res) => {
+//     res.render('home', { title: 'home', dev });
+// });
 
-app.get('/about', (req, res) => {
-    res.render('about', {title: 'about'});
-});
+// app.get('/about', (req, res) => {
+//     res.render('about', {title: 'about'});
+// });
 
-app.get('/document', (req, res) => {
-    res.render('document', {title: 'document'});
-});
-// lister
+// app.get('/document', (req, res) => {
+//     res.render('document', {title: 'document'});
+// });
 
-app.listen(port, (err) => {
-    if (err) {
-        console.log(err);
-    }
-    console.log("Server running");
+app.listen(port, host, () => {
+    console.log(`Server running on port ${port} and host ${host}`);
 });
 
