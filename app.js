@@ -3,7 +3,6 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const JSONC = require("jsonc");
-
 require("dotenv").config();
 
 const app = express();
@@ -51,10 +50,11 @@ app.post("/addDev", async (req, res) => {
     try {
         const newDev = new Dev(req.body);
         await newDev.save();
-        res.status(201).json({message: "Dev added Successfully!"});
+        res.status(201).json({ message: "Dev added successfully to the database!" });
     } catch (err) {
         console.error(`Error adding Dev ${err}`);
-        res.status(500).send("Internal Server Error")
+        console.error(`Raw Request Body: ${JSON.stringify(req.body)}`);
+        res.status(500).send("Internal Server Error");
     }
 });
 

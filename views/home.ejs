@@ -8,7 +8,7 @@
         <div class="mb-3">
             <label for="basic-url" class="form-label">Find suitable developer now!</label>
             <div class="input-group">
-              <select>
+              <select id="httpMethod" onchange="toggleJsonInput()">
                 <option value="GET" selected>GET</option>
                 <option value="POST">POST</option>
                 <option value="UPDATE">UPDATE</option>
@@ -16,9 +16,12 @@
               </select>
               <span class="input-group-text" id="basic-addon3">https://finddev.com/api/</span>
               <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4">
-              <button class="btn btn-outline-secondary" type="button" id="button-addon2">Request</button>
+              <button onclick="sendData()" class="btn btn-outline-secondary" type="button" id="button-addon2">Send</button>
             </div>
-            <div class="form-text" id="basic-addon4">Need a hint? try developer/1/</div>
+            <div id="jsonInput" style="display:none;">
+                <textarea id="jsonData" rows="1" cols="170"></textarea>
+                <!-- <button onclick="sendData()">Send</button> -->
+            </div>
         </div>
     </br>
         <!-- textarea to show fetched developers information in json format -->
@@ -37,5 +40,29 @@
     </div>
     <%- include('./partials/footer.ejs') %>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+    <script>
+        function toggleJsonInput() {
+            const httpMethod = document.getElementById("httpMethod").value;
+            const jsonInput = document.getElementById("jsonInput");
+            jsonInput.style.display = httpMethod === "POST" ? "block" : "none";
+        }
+        function sendData() {
+            const httpMethod = document.getElementById("httpMethod").value;
+            const jsonData = document.getElementById("jsonData").value;
+            if (httpMethod === "POST") {
+                fetch("/addDev", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: jsonData.stringify(),
+                })
+                .then(response => response.json())
+                .then(data => console.log(`Data sent: ${data}`))
+                .catch(error => console.error(`Error sending data ${error}`));
+            }
+        }
+    </script>
 </body>
 </html>
