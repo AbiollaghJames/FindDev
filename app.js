@@ -58,6 +58,15 @@ app.post("/addDev", async (req, res) => {
     }
 });
 
+// Delete dev
+// app.delete('/deleteDev/:id', (req, res) => {
+//     const id = req.params.id;
+//     Blog.findByIdAndDelete(id)
+//     .then(() => {
+//         res.json({redirect: '/blogs'})
+//     })
+//     .catch((err) => {console.log(err);});
+// })
 
 
 
