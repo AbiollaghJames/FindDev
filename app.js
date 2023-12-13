@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
+const JSONC = require("jsonc");
 require("dotenv").config();
 
 const app = express();
@@ -13,6 +14,9 @@ app.use(bodyParser.json());
 const port = process.env.PORT || 3000;
 const host = process.env.HOST || "127.0.0.1";
 
+// Files imports
+const Dev = require("./models/devs");
+
 // mongooseDB Connection
 mongoose.connect(process.env.DB_CONNECTION)
     .then(() => {
@@ -22,36 +26,40 @@ mongoose.connect(process.env.DB_CONNECTION)
         console.log(`Error connecting to DB ${err}`);
     });
 
-// //Sample Database for testing
-// const dev = {
-//     "name": "Abiolla",
-//     "email": "abiojame@protonmail.com",
-//     "location": "Nairobi, Kenya",
-//     "tech_stack": ['NodeJS', 'Flask', 'MongoDB', 'MySQL'],
-//     "social_media": {
-//         github: "link here",
-//         linkedin: "link here",
-//         twitter: "link here",
-//     },
-//     "projects": {
-//         title: "FindDev",
-//         description: "API that connects Devs",
-//         url: "link here",
-//     },
-// }
+// routes
+app.get('/', async (req, res) => {
+    try {
+        const devs = await Dev.find();
+        const stringifiedDevs = JSON.stringify(devs, null, 2);
+        res.render("home", { title: "home", stringifiedDevs });
+    } catch (err) {
+        console.error(`Error fetching data ${err}`);
+        res.status(500).send("Internal Server Error");
+    }
+});
 
-// // routes
-// app.get('/', (req, res) => {
-//     res.render('home', { title: 'home', dev });
-// });
+app.get('/about', (req, res) => {
+    res.render('about', {title: 'about'});
+});
 
-// app.get('/about', (req, res) => {
-//     res.render('about', {title: 'about'});
-// });
+app.get('/documentation', (req, res) => {
+    res.render('document', {title: 'document'});
+});
 
-// app.get('/document', (req, res) => {
-//     res.render('document', {title: 'document'});
-// });
+app.post("/addDev", async (req, res) => {
+    try {
+        const newDev = new Dev(req.body);
+        await newDev.save();
+        res.status(201).json({ message: "Dev added successfully to the database!" });
+    } catch (err) {
+        console.error(`Error adding Dev ${err}`);
+        console.error(`Raw Request Body: ${JSON.stringify(req.body)}`);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
+
+
 
 app.listen(port, host, () => {
     console.log(`Server running on port ${port} and host ${host}`);
