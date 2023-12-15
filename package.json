@@ -15,7 +15,8 @@
     "ejs": "^3.1.9",
     "express": "^4.18.2",
     "jsonc": "^2.0.0",
-    "mongoose": "^8.0.2"
+    "mongoose": "^8.0.2",
+    "morgan": "^1.10.0"
   },
   "devDependencies": {
     "mongodb": "^6.3.0",

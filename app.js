@@ -1,5 +1,6 @@
 // App modules
 const express = require("express");
+const morgan = require('morgan');
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
@@ -12,6 +13,7 @@ const app = express();
 // Middlewares
 app.set("view engine", "ejs");
 app.use(express.static("public"));
+app.use(morgan('dev'));
 app.use(bodyParser.json());
 
 // Enviroment variables
