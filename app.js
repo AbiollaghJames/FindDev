@@ -48,7 +48,7 @@ app.get('/about', (req, res) => {
     res.render('about', {title: 'about'});
 });
 
-app.get('/documentation', (req, res) => {
+app.get('/document', (req, res) => {
     res.render('document', {title: 'document'});
 });
 
