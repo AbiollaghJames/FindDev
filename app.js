@@ -58,17 +58,27 @@ app.post("/addDev", async (req, res) => {
     }
 });
 
-// Delete dev
-// app.delete('/deleteDev/:id', (req, res) => {
-//     const id = req.params.id;
-//     Blog.findByIdAndDelete(id)
-//     .then(() => {
-//         res.json({redirect: '/blogs'})
-//     })
-//     .catch((err) => {console.log(err);});
-// })
+// Get data by ID
+app.get("/getDev/:id", async (req, res) => {
+    try {
+        const dev = await Dev.findById(req.params.id);
+        res.json(dev);
+    } catch (error) {
+        console.error(`Error fetching Dev data: ${error}`);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 
-
+app.delete("/deleteDev/:id", async (req, res) => {
+    try {
+        const devId = req.params.id;
+        await Dev.deleteOne({ _id: devId });
+        res.status(200).json({ message: "Dev deleted successfully!" });
+    } catch (err) {
+        console.error(`Error deleting Dev: ${err}`);
+        res.status(500).send("Internal server error");
+    }
+});
 
 app.listen(port, host, () => {
     console.log(`Server running on port ${port} and host ${host}`);

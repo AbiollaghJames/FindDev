@@ -11,7 +11,7 @@
               <select id="httpMethod" onchange="toggleJsonInput()">
                 <option value="GET" selected>GET</option>
                 <option value="POST">POST</option>
-                <option value="UPDATE">UPDATE</option>
+                <option value="PUT">PUT</option>
                 <option value="DELETE">DELETE</option>
               </select>
               <span class="input-group-text" id="basic-addon3">https://finddev.com/api/</span>
@@ -20,17 +20,16 @@
             </div>
             <div id="jsonInput" style="display:none;">
                 <textarea id="jsonData" rows="1" cols="170"></textarea>
-                <!-- <button onclick="sendData()">Send</button> -->
             </div>
         </div>
     </br>
         <!-- textarea to show fetched developers information in json format -->
-        <div class="form-floating">
+        <form id="form" class="form-floating">
             <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 200px">
                 <%= stringifiedDevs %>
             </textarea>
             <label for="floatingTextarea2">Result</label>
-        </div>
+        </form>
     </br>
         <div class="bottom-icons">
             <i class="far fa-copy icon" onclick="copy()" title="Copy"></i>
@@ -50,17 +49,38 @@
         function sendData() {
             const httpMethod = document.getElementById("httpMethod").value;
             const jsonData = document.getElementById("jsonData").value;
+            const selectedIdToDelete = document.getElementById("basic-url").value;
+
             if (httpMethod === "POST") {
                 fetch("/addDev", {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
                     },
-                    body: jsonData.stringify(),
+                    body: jsonData,
                 })
                 .then(response => response.json())
-                .then(data => console.log(`Data sent: ${data}`))
+                .then(data => {
+                    alert("Dev added successfully!")
+                    window.location.href = "/";
+                })
                 .catch(error => console.error(`Error sending data ${error}`));
+            } else if (httpMethod === "DELETE") {
+                if (selectedIdToDelete) {
+                    fetch(`/deleteDev/${selectedIdToDelete}`, {
+                        method: "DELETE",
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        alert("Deleted Successfully!")
+                        window.location.href = "/";
+                    })
+                    .catch(err => console.error(`Error deleting Dev: ${err}`));
+                } else {
+                    alert("Enter ID to delete!");
+                }
+            } else {
+                alert("Unsupported HTTP method");
             }
         }
 
