@@ -80,9 +80,6 @@ app.delete("/deleteDev/:id", async (req, res) => {
     }
 });
 
-
-
-
 app.listen(port, host, () => {
     console.log(`Server running on port ${port} and host ${host}`);
 });
