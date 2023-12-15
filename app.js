@@ -11,7 +11,7 @@ const app = express();
 
 // Middlewares
 app.set("view engine", "ejs");
-app.use(express.static("views"));
+app.use(express.static("public"));
 app.use(bodyParser.json());
 
 // Enviroment variables
