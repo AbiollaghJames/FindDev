@@ -1,3 +1,4 @@
+// App modules
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
@@ -5,12 +6,15 @@ const ejs = require("ejs");
 const JSONC = require("jsonc");
 require("dotenv").config();
 
+// create express app instance
 const app = express();
 
+// Middlewares
 app.set("view engine", "ejs");
 app.use(express.static("views"));
 app.use(bodyParser.json());
 
+// Enviroment variables
 const port = process.env.PORT || 3000;
 const host = process.env.HOST || "127.0.0.1";
 
@@ -46,6 +50,7 @@ app.get('/documentation', (req, res) => {
     res.render('document', {title: 'document'});
 });
 
+// Add developer record to the database
 app.post("/addDev", async (req, res) => {
     try {
         const newDev = new Dev(req.body);
@@ -58,7 +63,7 @@ app.post("/addDev", async (req, res) => {
     }
 });
 
-// Get data by ID
+// Get a developer by ID
 app.get("/getDev/:id", async (req, res) => {
     try {
         const dev = await Dev.findById(req.params.id);
@@ -69,6 +74,7 @@ app.get("/getDev/:id", async (req, res) => {
     }
 });
 
+// Delete a developer document from DB
 app.delete("/deleteDev/:id", async (req, res) => {
     try {
         const devId = req.params.id;
