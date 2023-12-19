@@ -106,7 +106,6 @@ h3 {
 .icon {
     cursor: pointer;
 }
-<<<<<<< HEAD
 #httpMethod {
     background-color: white;
     transition: background-color 0.5s ease;
@@ -115,7 +114,6 @@ h3 {
 #httpMethod :hover {
     background-color: #ddd;
 }
-=======
 
 /* Modal styles */
 .modal {
@@ -237,4 +235,3 @@ button:hover {
         max-width: 90%;
     }
 }
->>>>>>> upstream/main
