@@ -3,32 +3,34 @@
 <body>
     <%- include('./partials/nav.ejs') %>
     <div>
-        <h2>FindDev API</h2>
+        <h1 class="top-heading">FindDev API</h1>
+        <p> Seamlessly connect with Developers from every corner of the globe. </p>
+        <hr style="border: 2px solid #ddd; margin-bottom: 90px;">
         
         <div class="mb-3">
-            <label for="basic-url" class="form-label">Find suitable developer now!</label>
+            <h2 for="basic-url" class="form-label" style="color: #ddd; margin-bottom: 40px;">Try it now!</h2>
             <div class="input-group">
-              <select id="httpMethod" onchange="toggleJsonInput()">
+              <select id="httpMethod" onchange="toggleJsonInput()" style="border: 1px white;">
                 <option value="GET" selected>GET</option>
                 <option value="POST">POST</option>
                 <option value="PUT">PUT</option>
                 <option value="DELETE">DELETE</option>
               </select>
-              <span class="input-group-text" id="basic-addon3">https://finddev.com/api/</span>
+              <span class="input-group-text" id="basic-addon3" style="background-color: rgb(96, 104, 101);">https://find.dev/api/</span>
               <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4">
               <button onclick="sendData()" class="btn btn-outline-secondary" type="button" id="button-addon2">Send</button>
             </div>
             <div id="jsonInput" style="display:none;">
-                <textarea id="jsonData" rows="1" cols="170"></textarea>
+                <textarea id="jsonData" rows="10" cols="120" style="margin-top: 40px; background-color: rgb(241, 236, 236);"></textarea>
             </div>
         </div>
     </br>
         <!-- textarea to show fetched developers information in json format -->
+        <label for="floatingTextarea2" style=" color: #ddd; margin-left: 200px; margin-top: 50px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: larger;">Result:</label>
         <form id="form" class="form-floating">
-            <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 200px">
+            <textarea class="form-control" id="floatingTextarea2" style="height: 400px; max-width: 70%; margin: 0 auto; background-color: rgb(241, 236, 236); margin-top: 20px;">
                 <%= stringifiedDevs %>
             </textarea>
-            <label for="floatingTextarea2">Result</label>
         </form>
     </br>
         <div class="bottom-icons">

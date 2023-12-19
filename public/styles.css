@@ -1,12 +1,33 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 body {
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 0 20px;
-    font-family: poppins;
+    max-width: 90%;
+    margin: 35px auto;
+    padding: 0 10px;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    background-color: #222;
+    color: #ddd;
 
 }
-p,h1,h2,h3,a,ul {
+h1 {
+    text-align: center;
+    margin-top: 100px;
+    margin-bottom: 20px;
+    color: #14e664;
+}
+
+p {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: large;
+    text-align: center;
+    margin-bottom: 130px;
+}
+
+h2 {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-weight: lighter;
+    text-align: center;
+}
+h2,a,ul {
     margin: 0;
     padding: 0;
     text-decoration: none;
@@ -39,7 +60,7 @@ nav p, nav a {
     font-weight: 300;
 }
 footer {
-    color: #777;
+    color: #292121;
     text-align: center;
     margin: 80px auto 20px;
 }
@@ -54,6 +75,11 @@ h3 {
 /* body content styles here */
 
 /* textarea style */
+.mb-3 {
+    max-width: 70%;
+    display: block;
+    margin: 0 auto;
+}
 
 .textarea-container {
     display: flex;
@@ -79,4 +105,12 @@ h3 {
 
 .icon {
     cursor: pointer;
+}
+#httpMethod {
+    background-color: white;
+    transition: background-color 0.5s ease;
+}
+
+#httpMethod :hover {
+    background-color: #ddd;
 }
