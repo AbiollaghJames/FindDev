@@ -21,7 +21,49 @@
               <button onclick="sendData()" class="btn btn-outline-secondary" type="button" id="button-addon2">Send</button>
             </div>
             <div id="jsonInput" style="display:none;">
+<<<<<<< HEAD
                 <textarea id="jsonData" rows="10" cols="120" style="margin-top: 40px; background-color: rgb(241, 236, 236);"></textarea>
+=======
+                <!-- <textarea id="jsonData" rows="1" cols="170"></textarea> -->
+
+                <!-- Modal section -->
+                <div id="myModal" class="modal">
+                    <div class="modal-content">
+                        <span class="close" id="closeModalBtn">&times;</span>
+                        <form id="developerForm">
+                            <label for="name">Name:</label>
+                            <input type="text" id="name" name="name" required>
+                
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" required>
+
+                            <label for="location">Location:</label>
+                            <input type="location" id="location" name="location" required>
+                
+                            <label for="techstack">Techstack (comma-separated):</label>
+                            <input type="techstack" id="techstack" name="techstack" required>
+                
+                            <label for="projects">Projects:</label>
+                            <div id="projectsContainer">
+                                <!-- Project Fields will be added dynamically with JavaScript -->
+                            </div>
+                            <button type="button" id="addProjectBtn">Add Project</button>
+                
+                            <label for="github">GitHub:</label>
+                            <input type="text" id="github" name="github">
+                
+                            <label for="linkedin">LinkedIn:</label>
+                            <input type="text" id="linkedin" name="linkedin">
+                
+                            <label for="twitter">Twitter:</label>
+                            <input type="text" id="twitter" name="twitter">
+                
+                            <button type="button" onclick="sendData()" id="submitBtn">Submit</button>
+                        </form>
+                    </div>
+                </div>
+                <!-- Modal section end -->
+>>>>>>> upstream/main
             </div>
         </div>
     </br>
@@ -43,53 +85,85 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
     <script>
+
         function toggleJsonInput() {
             const httpMethod = document.getElementById("httpMethod").value;
             const jsonInput = document.getElementById("jsonInput");
-            jsonInput.style.display = httpMethod === "POST" ? "block" : "none";
+            const modal = document.getElementById("myModal");
+
+            jsonInput.style.display = httpMethod === "POST" ? "flex" : "none";
+
+            // Show the modal if POST is selected
+            if (httpMethod === "POST") {
+                modal.style.display = 'block';
+            }
         }
         function sendData() {
             const httpMethod = document.getElementById("httpMethod").value;
-            const jsonData = document.getElementById("jsonData").value;
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const location = document.getElementById('location').value;
+            const techstack = document.getElementById('techstack').value.split(',').map(techstack => techstack.trim());
+            const projects = Array.from(document.querySelectorAll('#projectsContainer > .project-fields')).map(projectField => {
+                const title = projectField.querySelector('input[name="projectTitle"]').value;
+                const description = projectField.querySelector('input[name="projectDescription"]').value;
+                const url = projectField.querySelector('input[name="projectUrl"]').value;
+                return { title, description, url };
+        });
+            const github = document.getElementById('github').value;
+            const linkedin = document.getElementById('linkedin').value;
+            const twitter = document.getElementById('twitter').value;
+
+        const requestData = {
+            name,
+            email,
+            location,
+            techstack,
+            projects,
+            github,
+            linkedin,
+            twitter,
+        };
+
+        if (httpMethod === "POST") {
+            fetch("/addDev", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(requestData),
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert("Dev added successfully!");
+            window.location.href = "/";
+        })
+        .catch(error => {
+            console.error(`Error sending data: ${error}`);
+        });
+
+        // after sending data close the modal
+        modal.style.display = 'none';
+        } else if (httpMethod === "DELETE") {
             const selectedIdToDelete = document.getElementById("basic-url").value;
-
-            if (httpMethod === "POST") {
-                fetch("/addDev", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: jsonData,
-                })
-                .then(response => response.json())
-                .then(data => {
-                    alert("Dev added successfully!")
-                    window.location.href = "/";
-                })
-                .catch(error => console.error(`Error sending data ${error}`));
-            } else if (httpMethod === "DELETE") {
-                if (selectedIdToDelete) {
-                    fetch(`/deleteDev/${selectedIdToDelete}`, {
-                        method: "DELETE",
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        alert("Deleted Successfully!")
-                        window.location.href = "/";
-                    })
-                    .catch(err => console.error(`Error deleting Dev: ${err}`));
-                } else {
-                    alert("Enter ID to delete!");
-                }
-            } else {
-                alert("Unsupported HTTP method");
-            }
+        if (selectedIdToDelete) {
+            fetch(`/deleteDev/${selectedIdToDelete}`, {
+                method: "DELETE",
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert("Deleted Successfully!")
+                window.location.href = "/";
+            })
+            .catch(err => console.error(`Error deleting Dev: ${err}`));
+        } else {
+            alert("Enter ID to delete!");
         }
-
-        // implement copy logic here
-        function copy(){
-            //logic here
+        } else {
+            alert("Unsupported HTTP method");
         }
+}
+
     </script>
 </body>
 </html>
