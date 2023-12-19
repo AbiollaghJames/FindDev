@@ -103,10 +103,10 @@
                 const description = projectField.querySelector('input[name="projectDescription"]').value;
                 const url = projectField.querySelector('input[name="projectUrl"]').value;
                 return { title, description, url };
-        });
             const github = document.getElementById('github').value;
             const linkedin = document.getElementById('linkedin').value;
             const twitter = document.getElementById('twitter').value;
+        });
 
         const requestData = {
             name,
@@ -153,6 +153,19 @@
         } else {
             alert("Enter ID to delete!");
         }
+        } else if (httpMethod == "GET") {
+            const devID = document.getElementById('basic-url').value;
+            if (devID) {
+                fetch(`/getDev/${devID}`)
+                .then(response => response.json())
+                .then(data => {
+                  console.log("Data retrieved:", data);
+                })
+                .catch(error => {
+                    console.error("Error fetching data:", error);
+                });
+            }
+
         } else {
             alert("Unsupported HTTP method");
         }
