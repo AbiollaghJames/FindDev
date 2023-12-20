@@ -3,12 +3,12 @@
 <body>
     <%- include('./partials/nav.ejs') %>
     <div>
-        <h1 class="top-heading">FindDev API</h1>
-        <p> Seamlessly connect with Developers from every corner of the globe. </p>
-        <hr style="border: 2px solid #ddd; margin-bottom: 90px;">
+        <h1 class="top-heading" style="margin-top: 230px;">FindDev API</h1>
+        <p style="text-align: center;"> Seamlessly connect with Developers from every corner of the globe. </p>
+        <!-- <hr style="border: 1px solid #ddd; margin-bottom: 90px;"> -->
         
         <div class="mb-3">
-            <h2 for="basic-url" class="form-label" style="color: #ddd; margin-bottom: 40px;">Try it now!</h2>
+            <h2 for="basic-url" class="form-label" style="color: #ddd; margin-bottom: 40px; text-align: center;">Try it now!</h2>
             <div class="input-group">
               <select id="httpMethod" onchange="toggleJsonInput()" style="border: 1px white; height: 40px;">
                 <option value="GET" selected>GET</option>
@@ -65,7 +65,7 @@
         </div>
     </br>
         <!-- textarea to show fetched developers information in json format -->
-        <label for="floatingTextarea2" style=" color: #ddd; margin-left: 200px; margin-top: 50px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: larger;">Result:</label>
+        <label for="floatingTextarea2" style=" color: #ddd; margin-left: 240px; margin-top: 50px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: larger;">Result:</label>
         <form id="form" class="form-floating">
             <textarea class="form-control" id="floatingTextarea2" style="height: 400px; max-width: 70%; margin: 0 auto; background-color: rgb(241, 236, 236); margin-top: 20px;">
                 <%= stringifiedDevs %>
