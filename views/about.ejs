@@ -3,40 +3,64 @@
 <body>
     <%- include('./partials/nav.ejs') %>
 
-    <div class="about content">
-        <h2>About</h2>
-
-        <p><h1>What is this?</h1>
-
-        This api project enables developers to register, record their details, 
-        this enables easier data search at a later date, when needed.
-
+    <div style="font-family: 'Courier New', Courier, monospace; max-width: 80%; margin-left: 150px;">
+        <p>
+            <h1 style="margin-right: 72%;">
+                What is this?
+            </h1>
+            <p style="text-align: justify;">
+                FindDev is a dynamic API designed to facilitate global connectivity among developers. 
+                It's tailored to empower developers worldwide by providing a platform where they can 
+                showcase their professional profiles. 
+                By entering essential details like name, email, and location, developers can highlight 
+                their expertise and contribute to a thriving community of like-minded professionals.The 
+                platform extends beyond basic information, allowing developers to showcase their technical 
+                prowess througha comprehensive tech stack listing. Moreover, it recognizes the importance 
+                of social connections in the modern tech landscape. Developers can effortlessly integrate 
+                their Github, LinkedIn, and Twitter handles, enabling others to explore their work and 
+                engage in meaningful professional interactions.
+            </p>
         </p>
-        <p><h1>What are the features?</h1>
-
-        We're using Node JS, Express JS, Mongo DB, Thunder Client, 
-        and Netlify to serve an API to you. The data is all formatted in JSON 
-        and we also support JSON Schema for programmatically understanding the attributes of each resource. 
+        <p>
+            <h1 style="margin-right: 52%;">
+                What are the features?
+            </h1>
+            <p style="text-align: justify;">
+                We're using <b>NodeJS</b> and <b>ExpressJS</b> to serve this API to you. The data is all formatted in JSON and we also support JSON Schema for programmatically understanding the attributes of each resource.
+                <b>MongoDB</b> is also used for Data storage and management.
+            </p> 
         </p>
 
         <p>
-        <h1>Why we used the above features:</h1>
-
-        <p>-JavaScript: The ability to use JavaScript for both server-side (Node.js) and client-side development.</p>
-        <p>-Rapid Development: Express.js streamlines API development with a minimalist and flexible framework, allowing for quick prototyping and development.</p>
-        <p>-Scalability: MongoDB's horizontal scaling and Netlify's global CDN contribute to the scalability of the overall system.</p>
-        <p>-Serverless Functions: Netlify allows the integration of serverless functions, enabling developers to build APIs without managing server infrastructure.</p>
-       
+            <h1 style="margin-right: 32%;">
+                Why we used the above features:
+            </h1>
+            <p>
+                The above mentioned technologies were preferred over others due to the following reasons; <br>
+                <br>
+                Both the server and client-side codes are written in JavaScript, simplifying development and reducing context-switching for developers. <br>
+                Known for its event-driven, non-blocking architecture, Node.js excels at handling asynchronous operations.<br>
+                The combination of Node.js and Express enables fast development cycles, making it well-suited for building scalable APIs with quick turnaround times.<br>
+                As a NoSQL database, MongoDB provides flexibility in handling unstructured data, making it suitable for scenarios where the data structure may evolve over time.<br>
+                These technologies have large and active communities, offering extensive libraries, modules, and resources.
+            </p>
         </p>
 
-        <p><h1>Contributors</h1>
-
-        FindDev api would not be possible without contributions from the following people:
-
-           <p>- Owen Oscar</p>
-           <p>- James Abiollagh</p>
-           <p>- Faith Nyaberi</p>
-           <p>- Smitt Thanki</p>
+        <p>
+            <h1 style="margin-right: 82%;">
+                Contributors
+            </h1>
+            <div>
+                <p style="margin-bottom: 20px;">
+                    FindDev api would not be possible without contributions from the following people:
+                </p>
+                <ul style="color: #ddd; margin-left: 50px; font-size: large;">
+                    <li>Owen Oscar</li>
+                    <li>Abiollagh James</li>
+                    <li>Faith Nyaberi</li>
+                    <li>Smitt Thanki</li>
+                </ul>
+            </div>
         <p>
     </div>
     <%- include('./partials/footer.ejs') %>
