@@ -2,9 +2,63 @@
     <%- include('./partials/head.ejs') %>
 <body>
     <%- include('./partials/nav.ejs') %>
-    <div>
-      <h2>Documentation</h2>
-      <p>Documentation for FindDev API goes here</p>
+    <div style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; margin-top: 90px; margin-left: 20px; margin-right: 40px; padding: auto;">
+      <h1 style="color: #14e664;"> Documentation </h1>
+      <hr style="color: #ddd 1px solid;">
+
+      <h3 style="color: #14e664;"> Introduction </h3>
+      <p style="margin-right: 40px;">
+        Welcome to FinDev, the FindDev API! This documentation should help you familiarise yourself with the resources
+        available and how to consume them with HTTP requests. If you're after a native helper library then I suggest you scroll
+        down and check out what's available. Read through the getting started section before you dive in. Most of your problems
+        should be solved just by reading through it.
+      </p>
+
+      <h3 style="color: #14e664;"> What to Know </h3>
+      <p >
+        This application is comprised of three main web pages, they include the home page, about page and documentation page <br>
+        The Home page is where most of the actions takes place, i.e. it offers functionalities for users to choose from a dropdown menu the httpMethod
+        they want to use, a text area to enter information for more advanced searches, a send button and a text area that displays data based on the
+        http method one choses from the drop down menu. <br>
+        The About Page describes the general functionalities of this web app, technologies used as well as the contributors of this amazing
+        web app. <br>
+        The Documentation page offer finer details on how to navigate the application, what http method to use and how and where to use it as well 
+        as general description of this project.
+      </p>
+
+      <h3 style="color: #14e664;">Getting started</h3>
+      <p>
+        Let's make our first API request to the FindDev API! <br>
+        Type on your browser the url to the main page <b> https://finddev.com/api/</b>. <br>
+        This will display a page with a text area where information of all developer within our system will be displayed.
+      </p>
+
+      <h3 style="color: #14e664;">GET Request</h3>
+      <p>
+        GET request are of two types in this case; <br>
+        You can perform a get request for all Developers, which is the default http method when one visits the home page 
+        You can also perform a GET request based on a particular ID. Once you enter the ID of a developer you want to
+        search, click the send button and this will query the database for that particlar ID and sends back a response
+        of that particular ID. The response will be displayed on the text area.
+      </p>
+
+      <h3 style="color: #14e664;">POST Request</h3>
+      <p>
+        This enables one to add data to the API; <br>
+        When POST method is selected from the drop down, a pop up form will appear on the screen. This will prompt the user to enter his/her 
+        data and upon clicking submit, the form will disapper and the data will be sent to the Database. The page will then refresh with the home
+        page being displayed and one can scroll the text area to view the posted data.
+      </p>
+
+      <h3 style="color: #14e664;">DELETE Request</h3>
+      <p>
+        The delete method remove a developer permanently from the Database.  <br>
+        Just like erasing one's contact from your phone, when you select DELETE from the http methods dropdown menu, you will be required to
+        provide the ID of a Developer you want to delete, failure to which an alert will pop up on the screen prompting you to enter the ID
+        you want to perform DELETE operation on.
+        Once the ID is provided, continue by clicking the send button and once the operation is complete, a pop up will appear on the screen with a
+        success message. This means that the data has been successfully erased from the Database.
+      </p>
     </div>
     <%- include('./partials/footer.ejs') %>
 </body>
