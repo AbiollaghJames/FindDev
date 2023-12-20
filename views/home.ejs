@@ -10,15 +10,15 @@
         <div class="mb-3">
             <h2 for="basic-url" class="form-label" style="color: #ddd; margin-bottom: 40px;">Try it now!</h2>
             <div class="input-group">
-              <select id="httpMethod" onchange="toggleJsonInput()" style="border: 1px white;">
+              <select id="httpMethod" onchange="toggleJsonInput()" style="border: 1px white; height: 40px;">
                 <option value="GET" selected>GET</option>
                 <option value="POST">POST</option>
                 <option value="PUT">PUT</option>
                 <option value="DELETE">DELETE</option>
               </select>
-              <span class="input-group-text" id="basic-addon3" style="background-color: rgb(96, 104, 101);">https://find.dev/api/</span>
+              <span class="input-group-text" id="basic-addon3" style="background-color: rgb(96, 104, 101); height: 40px;">https://find.dev/api/</span>
               <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3 basic-addon4">
-              <button onclick="sendData()" class="btn btn-outline-secondary" type="button" id="button-addon2">Send</button>
+              <button onclick="sendData()" class="btn btn-outline-secondary" type="button" id="button-addon2" style="height: 40px;">Send</button>
             </div>
             <div id="jsonInput" style="display:none;">
                 <textarea id="jsonData" rows="10" cols="120" style="margin-top: 40px; background-color: rgb(241, 236, 236);"></textarea>
@@ -102,15 +102,14 @@
             const location = document.getElementById('location').value;
             const techstack = document.getElementById('techstack').value.split(',').map(techstack => techstack.trim());
             const projects = Array.from(document.querySelectorAll('#projectsContainer > .project-fields')).map(projectField => {
-                const title = projectField.querySelector('input[name="projectTitle"]').value;
-                const description = projectField.querySelector('input[name="projectDescription"]').value;
-                const url = projectField.querySelector('input[name="projectUrl"]').value;
-                return { title, description, url };
+            const title = projectField.querySelector('input[name="projectTitle"]').value;
+            const description = projectField.querySelector('input[name="projectDescription"]').value;
+            const url = projectField.querySelector('input[name="projectUrl"]').value;
+            return { title, description, url };
             const github = document.getElementById('github').value;
             const linkedin = document.getElementById('linkedin').value;
             const twitter = document.getElementById('twitter').value;
         });
-
         const requestData = {
             name,
             email,
@@ -162,7 +161,16 @@
                 fetch(`/getDev/${devID}`)
                 .then(response => response.json())
                 .then(data => {
-                  console.log("Data retrieved:", data);
+                    const textArea = document.getElementById("floatingTextarea2");
+                    textArea.readOnly = true;
+                    textArea.value = JSON.stringify(data);
+                    const propertyOrder = ['name', 'email', 'location', 'techStack', 'social_media', 'project'];
+                    const orderedData = {};
+                    propertyOrder.forEach(property => {
+                        orderedData[property] = data[property];
+                    });
+                    const jsonString = JSON.stringify(data, null, 2);
+                    textArea.value = jsonString;
                 })
                 .catch(error => {
                     console.error("Error fetching data:", error);
