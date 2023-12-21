@@ -36,7 +36,7 @@ mongoose.connect(process.env.DB_CONNECTION)
 app.get('/', async (req, res) => {
     try {
         const devs = await Dev.find();
-        const stringifiedDevs = JSON.stringify(devs, null, 2);
+        const stringifiedDevs = JSON.stringify(devs, null, 14);
         res.render("home", { title: "home", stringifiedDevs });
     } catch (err) {
         console.error(`Error fetching data ${err}`);
@@ -61,7 +61,7 @@ app.post("/addDev", async (req, res) => {
     } catch (err) {
         console.error(`Error adding Dev ${err}`);
         console.error(`Raw Request Body: ${JSON.stringify(req.body)}`);
-        res.status(500).send("Internal Server Error");
+        res.status(500).send({ error: "Internal Server Error", details: err.message });
     }
 });
 
